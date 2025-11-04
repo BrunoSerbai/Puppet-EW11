@@ -1,2 +1,2 @@
 # Indrel-IOT-Tester
-A program that tests iot devices in a network 
+Um programa feito para testar dispspositivos iot 
