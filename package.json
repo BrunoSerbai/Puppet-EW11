@@ -1,5 +1,7 @@
 {
+  "type": "module",
   "dependencies": {
-    "puppeteer": "^24.28.0"
+    "puppeteer": "^24.28.0",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   }
 }
