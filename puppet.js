@@ -19,20 +19,13 @@ for(let i = 1;i < data.length; i++){
 
     try{
         await page.goto(`http://${data[i][0]}`, { timeout: 10000, waitUntil: 'load' })
-    }
-    catch(err){ 
-        console.error(`ERRO: Não foi possivel acessar: ${data[i][0]}`);
-        continue
-    }
 
-    // Seleciona elemento de status do dispositivo 
-    const iotStatus = await page.waitForSelector('.content_main',{ visible:true, timeout:20000 })   
-    await new Promise(r => setTimeout(r, 1000)); // Espera 1 segundo pra garantir que o elemento terminou de renderizar
- 
+        // Seleciona elemento de status do dispositivo 
+        const iotStatus = await page.waitForSelector('.content_main',{ visible:true, timeout:20000 })   
+        await new Promise(r => setTimeout(r, 1000)); // Espera 1 segundo pra garantir que o elemento terminou de renderizar
 
-    // Tira um print e pega informações
-    try{
-
+        // Tira um print e pega informações
+        
         // MAC
         await page.waitForSelector('#mac');
         const numSerie = await page.$eval('#mac',el => el.innerText)
@@ -47,13 +40,12 @@ for(let i = 1;i < data.length; i++){
         await page.waitForSelector("[name=RecvBytes]")
         const mqttEnviado = await page.$eval('[name=RecvBytes]',el => el.innerText)
         console.log(`Número de dado enviados pelo MQTT: ${mqttEnviado}`)
-        
 
+        // Tira um print do status
         await iotStatus.screenshot({path:`print-${numSerie}.jpg`})
         
         // Verifica o servidor para se comunicar 
         await page.goto(`http://${ip}/socket.html`)
-
         await page.waitForSelector('#server', { visible: true, timeout: 10000 }); // Espera o elemento carregar 
         const urlServidor = await page.$eval('#server',el => el.value)
         console.log(`Servidor a se comunicar: ${urlServidor}`)
@@ -61,9 +53,10 @@ for(let i = 1;i < data.length; i++){
 
     }
     catch(err){
-        console.error(`ERRO: Página de Status indisponivel ${err}`)
+        console.error(`${err}`)
+        continue
     } 
-    console.log("\n")
 }
 
+console.log("\n")
 await browser.close()
