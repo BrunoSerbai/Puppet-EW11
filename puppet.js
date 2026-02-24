@@ -11,12 +11,10 @@ const page = await browser.newPage()
 await page.authenticate({'username':'USER', 'password': 'PASSWORD'});
 
 // Access the device configuration page
-await page.goto('http://IP-DO-DISPOSITIVO')
-
+await page.goto('http://IP-OF-DEVICE')
 
 // Select the element with the device status
 const iotStatus = await page.waitForSelector('.content_main')
-
 
 // System State
 console.log(`\nSystem State\n`)
