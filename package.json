@@ -1,6 +1,10 @@
 {
   "type": "module",
   "dependencies": {
-    "puppeteer": "^24.28.0"
+    "dotenv": "^17.3.1",
+    "puppeteer": "^24.38.0"
+  },
+  "scripts": {
+    "dev": "node --watch ./src/puppet.js"
   }
 }
