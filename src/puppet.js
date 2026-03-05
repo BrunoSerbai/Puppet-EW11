@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import puppeteer from 'puppeteer'
-import { resetEW11 } from './controllers/reset.js'
+import { resetEW11 } from './controller/reset.js'          
 
 const browser = await puppeteer.launch({
   headless: false,
@@ -134,6 +134,6 @@ const iotStatus = await page.waitForSelector('.content_main')
 await iotStatus.screenshot({path: 'screenshot-status.jpg'})
 
 // Reset EW11
-//await resetEW11(page)
+await resetEW11(page)
 
 await browser.close()
